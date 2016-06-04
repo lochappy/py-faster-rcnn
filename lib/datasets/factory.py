@@ -11,6 +11,7 @@ __sets = {}
 
 from datasets.pascal_voc import pascal_voc
 from datasets.coco import coco
+from datasets.inria import inria
 import numpy as np
 
 # Set up voc_<year>_<split> using selective search "fast" mode
@@ -30,6 +31,11 @@ for year in ['2015']:
     for split in ['test', 'test-dev']:
         name = 'coco_{}_{}'.format(year, split)
         __sets[name] = (lambda split=split, year=year: coco(split, year))
+
+inria_devkit_path = '/home/deboc/py-faster-rcnn/data/INRIA_Person_devkit'
+for split in ['train', 'test']:
+    name = '{}_{}'.format('inria', split)
+    __sets[name] = (lambda split=split: inria(split, inria_devkit_path))
 
 def get_imdb(name):
     """Get an imdb (image database) by name."""
