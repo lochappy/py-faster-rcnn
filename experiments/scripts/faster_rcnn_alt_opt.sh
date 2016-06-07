@@ -27,6 +27,14 @@ case $DATASET in
     TRAIN_IMDB="voc_2007_trainval"
     TEST_IMDB="voc_2007_test"
     PT_DIR="pascal_voc"
+    CONFIG_FILE="experiments/cfgs/faster_rcnn_alt_opt.yml"
+    ITERS=40000
+    ;;
+  INRIA_Person)
+    TRAIN_IMDB="inria_train"
+    TEST_IMDB="inria_test"
+    PT_DIR="INRIA_Person"
+    CONFIG_FILE="experiments/cfgs/INRIA_Person_faster_rcnn_alt_opt.yml"
     ITERS=40000
     ;;
   coco)
@@ -47,7 +55,7 @@ time ./tools/train_faster_rcnn_alt_opt.py --gpu ${GPU_ID} \
   --net_name ${NET} \
   --weights data/imagenet_models/${NET}.v2.caffemodel \
   --imdb ${TRAIN_IMDB} \
-  --cfg experiments/cfgs/faster_rcnn_alt_opt.yml \
+  --cfg ${CONFIG_FILE} \
   ${EXTRA_ARGS}
 
 set +x
@@ -58,5 +66,5 @@ time ./tools/test_net.py --gpu ${GPU_ID} \
   --def models/${PT_DIR}/${NET}/faster_rcnn_alt_opt/faster_rcnn_test.pt \
   --net ${NET_FINAL} \
   --imdb ${TEST_IMDB} \
-  --cfg experiments/cfgs/faster_rcnn_alt_opt.yml \
+  --cfg ${CONFIG_FILE} \
   ${EXTRA_ARGS}

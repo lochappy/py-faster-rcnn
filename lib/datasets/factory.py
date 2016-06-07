@@ -32,7 +32,7 @@ for year in ['2015']:
         name = 'coco_{}_{}'.format(year, split)
         __sets[name] = (lambda split=split, year=year: coco(split, year))
 
-inria_devkit_path = '/home/deboc/py-faster-rcnn/data/INRIA_Person_devkit'
+inria_devkit_path = '/home/lochappy/lochappy/00_detection_cnn/py-faster-rcnn/data/INRIA_Person_devkit'
 for split in ['train', 'test']:
     name = '{}_{}'.format('inria', split)
     __sets[name] = (lambda split=split: inria(split, inria_devkit_path))

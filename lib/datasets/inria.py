@@ -17,10 +17,13 @@ import subprocess
 
 class inria(imdb):
     def __init__(self, image_set, devkit_path):
-        imdb.__init__(self, image_set)
+        imdb.__init__(self,"INRIA_Person_" + image_set)
         self._image_set = image_set
         self._devkit_path = devkit_path
-        self._data_path = os.path.join(self._devkit_path, 'data')
+        if image_set == 'train':
+            self._data_path = os.path.join(self._devkit_path, 'data')
+        else:
+            self._data_path = os.path.join(self._devkit_path, 'testData')
         self._classes = ('__background__', # always index 0
                          'person')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
